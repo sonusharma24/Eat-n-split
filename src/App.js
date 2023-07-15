@@ -9,6 +9,7 @@ import { initialFriends } from "./data";
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [friendList, setFriendList] = useState(initialFriends);
+  const [isSelected, setIsSelected] = useState(null);
 
   const addFriendHandler = () => {
     setIsOpen((prev) => !prev);
@@ -16,19 +17,29 @@ function App() {
 
   const friendListHandler = (friend) => {
     setFriendList((prev) => [...prev, friend]);
+    setIsOpen(false);
   };
+
+  const selectionHandler = (friend) => {
+    setIsSelected((prev) => (prev?.id === friend.id ? null : friend));
+  };
+
   return (
     <>
       <div className="app">
         <div className="sidebar">
-          <Friends friendList={friendList} />
+          <Friends
+            isSelected={isSelected}
+            friendList={friendList}
+            selectionHandler={selectionHandler}
+          />
           {isOpen && <AddFriendForm friendListHandler={friendListHandler} />}
 
-          <Button addFriendHandler={addFriendHandler}>
+          <Button onClick={addFriendHandler}>
             {isOpen ? "close" : "Add Friend"}
           </Button>
         </div>
-        <BillSplitForm />
+        {isSelected && <BillSplitForm friends={isSelected} />}
       </div>
     </>
   );

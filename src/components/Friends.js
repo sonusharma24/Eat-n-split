@@ -1,11 +1,18 @@
 import React from "react";
 import FriendsList from "./FriendsList";
 
-const Friends = ({ friendList }) => {
+const Friends = ({ isSelected, friendList, selectionHandler }) => {
   return (
     <ul>
       {friendList.map((friend) => {
-        return <FriendsList key={friend.id} friend={friend} />;
+        return (
+          <FriendsList
+            isSelected={isSelected}
+            selectionHandler={selectionHandler}
+            key={friend.id}
+            friend={friend}
+          />
+        );
       })}
     </ul>
   );
