@@ -9,6 +9,7 @@ const AddFriendForm = ({ friendListHandler }) => {
 
   const friendFormHandler = (e) => {
     e.preventDefault();
+    if (!name || image) return;
     const newFriends = {
       name,
       image: `${image}?u=${id}`,

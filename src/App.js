@@ -24,6 +24,18 @@ function App() {
     setIsSelected((prev) => (prev?.id === friend.id ? null : friend));
   };
 
+  const splitBillHandler = (balance) => {
+    setFriendList((prev) =>
+      prev.map((friend) =>
+        friend.id === isSelected.id
+          ? { ...friend, balance: friend.balance + balance }
+          : friend
+      )
+    );
+
+    setIsSelected(null);
+  };
+
   return (
     <>
       <div className="app">
@@ -39,7 +51,12 @@ function App() {
             {isOpen ? "close" : "Add Friend"}
           </Button>
         </div>
-        {isSelected && <BillSplitForm friends={isSelected} />}
+        {isSelected && (
+          <BillSplitForm
+            friends={isSelected}
+            onSplitBillHandler={splitBillHandler}
+          />
+        )}
       </div>
     </>
   );
