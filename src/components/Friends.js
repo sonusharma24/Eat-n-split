@@ -1,5 +1,6 @@
 import React from "react";
 import FriendsList from "./FriendsList";
+import Button from "./Button";
 
 const Friends = () => {
   const initialFriends = [
@@ -24,11 +25,11 @@ const Friends = () => {
   ];
   const friends = initialFriends;
   return (
-    <div className="sidebar">
+    <ul>
       {friends.map((friend) => {
         return <FriendsList key={friend.id} friend={friend} />;
       })}
-    </div>
+    </ul>
   );
 };
 
